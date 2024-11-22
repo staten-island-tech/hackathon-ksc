@@ -11,7 +11,12 @@ pygame.display.set_caption("Game")
 running = True 
 while running:
     for event in pygame.event.get():
+        screen.fill((235, 192, 230))
         if event.type == pygame.QUIT:
             running = False
+    
+    
+screen.fill((100, 0, 0))
+pygame.display.update()
 
-screen.fill((235, 192, 230))
+pygame.quit()
