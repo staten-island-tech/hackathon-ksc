@@ -9,54 +9,91 @@
 
 ## 1. **Task/Problem Description**
 
-Briefly describe the problem you're trying to solve or the task you're working on.
-
-Example:
-> I need to write a program that sorts a list of integers in ascending order.
+``text
+I need to create an program using pygame, that allows the player to move a character horizontally to collect items.
+``
 
 ---
 
 ## 2. **Initial Approach/Code**
 
-Describe the initial approach you took to solving the problem. If you started writing code, include it here.
-
 ```python
-# Example: Initial sorting function
-def sort_numbers(numbers):
-    return sorted(numbers)
+import pygame
+pygame.init()
+
+screen_width = 1200
+screen_height = 800
+
+screen = pygame.display.set_mode((screen_width,screen_height))
+pygame.display.set_caption("Game")
+
+running = True 
+while running:
+    for event in pygame.event.get():
+        screen.fill((235, 192, 230))
+        if event.type == pygame.QUIT:
+            running = False
+    
+    
+screen.fill((100, 0, 0))
+pygame.display.update()
 ```
 
-- What was your plan for solving the problem?
-- Did you have any initial thoughts or strategies before using ChatGPT?
+My initial approch to this project is to create an basic pygame window and a game loop. I haven’t yet added any gameplay mechanics.
 
 ---
 
 ## 3. **Interaction with ChatGPT**
 
 ### Questions/Requests to ChatGPT
-Write down the questions or requests you made to ChatGPT. 
-Also include what code from ChatGPT you are unsure of and craft a question that asks for further clarification. 
- For example:
-
-- "How do I reverse a list in Python?"
-- "Can you suggest a more efficient way to sort a list?"
-- Why did ChatGPT opt for create element when my teacher suggested insertAdjacentHTML?
 
 ```text
-# Example prompt to ChatGPT:
-How can I optimize this sorting function for large datasets?
+How do I add a player that moves left and right on the screen?
 ```
 
 ---
 
 ## 4. **ChatGPT's Suggestions/Code Changes**
 
-Record the code or suggestions ChatGPT provided. Include any changes or improvements ChatGPT suggested and how it influenced your approach.
-
 ```python
-# ChatGPT suggested using a custom sorting algorithm to improve efficiency
-def optimized_sort(numbers):
-    # Implementation of a more efficient sorting algorithm
+import pygame
+
+pygame.init()
+
+screen_width = 1200
+screen_height = 800
+screen = pygame.display.set_mode((screen_width, screen_height))
+pygame.display.set_caption("Game")
+
+# Player setup
+player_width = 50
+player_height = 50
+player_x = screen_width // 2
+player_y = screen_height - player_height - 10
+player_speed = 5
+
+running = True 
+while running:
+    for event in pygame.event.get():
+        if event.type == pygame.QUIT:
+            running = False
+
+    # Player movement
+    keys = pygame.key.get_pressed()
+    if keys[pygame.K_LEFT] and player_x > 0:
+        player_x -= player_speed
+    if keys[pygame.K_RIGHT] and player_x < screen_width - player_width:
+        player_x += player_speed
+
+    # Background color
+    screen.fill((235, 192, 230))
+
+    # Draw player
+    pygame.draw.rect(screen, (0, 0, 255), (player_x, player_y, player_width, player_height))
+
+    pygame.display.update()
+
+pygame.quit()
     pass
 ```
 
@@ -67,39 +104,18 @@ def optimized_sort(numbers):
 
 ## 5. **Reflection on Changes**
 
-Reflect on the changes made to your code after ChatGPT's suggestions. Answer the following questions:
-
-- Why do you think ChatGPT's suggestions are helpful or relevant?
-- Did the suggestions improve your code? How?
-- Did you understand why the changes were made, or are you still uncertain about some parts?
-
-Example:
-> ChatGPT recommended using a more efficient sorting algorithm like quicksort. I think this will improve the runtime for large inputs, but I need to review the algorithm's complexity to fully understand its advantages.
+ChatGPT was helpful in setting up movement. The game loop now allows for continuous movement, and the player can move around the character. I now know how to use basic user input and move a player object around in pygame. 
 
 ---
 
 ## 6. **Testing and Results**
 
-After making the changes, did you test your code? What were the results?
-
-- Did you run any tests (e.g., unit tests, edge cases)?
-- Did the code work as expected after incorporating ChatGPT's changes?
-
-```python
-# Example: Testing the updated sorting function
-numbers = [5, 2, 9, 1]
-print(optimized_sort(numbers))  # Expected output: [1, 2, 5, 9]
-```
-
-- Did you encounter any bugs or issues during testing?
+I ran the updated code, and the player character moves left and right. However, it's still missing music notes and a scoring system.
 
 ---
 
 ## 7. **What Did You Learn?**
 
-In this section, reflect on what you learned from this coding session. Did you gain any new insights, or were there areas you still struggled with? 
-
-Example:
-> I learned how to implement an efficient sorting algorithm, and I now understand the time complexity differences between various sorting methods.
+I learned how to use basic user input and move a player object around in pygame. I also have an little understanding on game loops in pygame. I am more confident in the basics, however, I need more practice with adding and handling multiple game objects.
 
 ---
