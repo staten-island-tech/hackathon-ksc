@@ -8,7 +8,7 @@ pygame.init()
 screen_width = 800
 screen_height = 600
 screen = pygame.display.set_mode((screen_width, screen_height))
-pygame.display.set_caption('Pygame Background Example')
+pygame.display.set_caption('KSC Game')
 
 # Load a background image (make sure the image exists in the same directory as the script)
 background = pygame.image.load('pixel-background.jpg')  # Replace with your image file path
