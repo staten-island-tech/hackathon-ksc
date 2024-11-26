@@ -6,7 +6,6 @@ screen_height = 800
 
 screen = pygame.display.set_mode((screen_width,screen_height))
 pygame.display.set_caption("Dinosaur game")
-background = pygame.image.load('downloads/pixlebg.jpg')
 
 player_x = 100
 player_y = 300
@@ -19,7 +18,6 @@ obstacle_y = 330
 obstacle_width = 30
 obstacle_height = 30
 
-
 running = True 
 while running:
     for event in pygame.event.get():
@@ -31,7 +29,7 @@ while running:
     if keys[pygame.K_SPACE] and not jumping:
         jumping = True
             
-     if jumping:
+    elif jumping:
         player_y -= 5  
         if player_y <= 200:  
             jumping = False
@@ -43,12 +41,13 @@ while running:
     if obstacle_x < -30: 
         obstacle_x = 800
 
-    if dino_x < obstacle_x + obstacle_width and dino_x + dino_width > obstacle_x and dino_y + dino_height > obstacle_y:
+    if player_x < obstacle_x + obstacle_width and player_x + player_width > obstacle_x and player_y + player_height > obstacle_y:
         running = False
         
-        
-    ygame.draw.rect(screen, (0, 0, 255), (player_x, player_y, player_width, player_height))
-    
+    screen.fill((235, 192, 230))  
+    pygame.draw.rect(screen, (0, 0, 255), (player_x, player_y, player_width, player_height))
+    pygame.draw.rect(screen, (255, 0, 0), (obstacle_x, obstacle_y, obstacle_width, obstacle_height))
+
     pygame.display.update()
     pygame.time.delay(30)
 
