@@ -1,16 +1,16 @@
 
 # ChatGPT Coding Diary
 
-## Project Name: _[Insert project name]_
+## Project Name: Dinosaur game
 
-### Date: _[Insert date]_
+### Date: _11/25/24_
 
 ---
 
 ## 1. **Task/Problem Description**
 
 ``text
-I need to create an program using pygame, that allows the player to move a character horizontally to collect items.
+I need to create an program using pygame, that allows the player to move a character to jump over obstacles.
 ``
 
 ---
@@ -48,7 +48,7 @@ My initial approch to this project is to create an basic pygame window and a gam
 ### Questions/Requests to ChatGPT
 
 ```text
-How do I add a player that moves left and right on the screen?
+How can I add controls to make the dinosaur jump over obstacles?
 ```
 
 ---
@@ -57,20 +57,31 @@ How do I add a player that moves left and right on the screen?
 
 ```python
 import pygame
+import sys
 
 pygame.init()
 
-screen_width = 1200
-screen_height = 800
+screen_width = 800
+screen_height = 400
 screen = pygame.display.set_mode((screen_width, screen_height))
-pygame.display.set_caption("Game")
+pygame.display.set_caption("Dinosaur Game")
 
-# Player setup
-player_width = 50
-player_height = 50
-player_x = screen_width // 2
-player_y = screen_height - player_height - 10
-player_speed = 5
+# Dinosaur setup
+dino_width = 50
+dino_height = 50
+dino_x = 100
+dino_y = screen_height - dino_height - 20
+is_jumping = False
+jump_velocity = 10
+gravity = 0.5
+y_velocity = 0
+
+# Obstacle setup
+obstacle_width = 30
+obstacle_height = 30
+obstacle_x = screen_width
+obstacle_y = screen_height - obstacle_height - 20
+obstacle_speed = 5
 
 running = True 
 while running:
@@ -78,44 +89,59 @@ while running:
         if event.type == pygame.QUIT:
             running = False
 
-    # Player movement
+    # Controls for jumping
     keys = pygame.key.get_pressed()
-    if keys[pygame.K_LEFT] and player_x > 0:
-        player_x -= player_speed
-    if keys[pygame.K_RIGHT] and player_x < screen_width - player_width:
-        player_x += player_speed
+    if keys[pygame.K_SPACE] and not is_jumping:
+        is_jumping = True
+        y_velocity = -jump_velocity
 
-    # Background color
-    screen.fill((235, 192, 230))
+    # Update dinosaur position
+    if is_jumping:
+        dino_y += y_velocity
+        y_velocity += gravity
+        if dino_y >= screen_height - dino_height - 20:  # Stop jump when hitting the ground
+            dino_y = screen_height - dino_height - 20
+            is_jumping = False
 
-    # Draw player
-    pygame.draw.rect(screen, (0, 0, 255), (player_x, player_y, player_width, player_height))
+    # Update obstacle position
+    obstacle_x -= obstacle_speed
+    if obstacle_x < -obstacle_width:
+        obstacle_x = screen_width
+
+    # Check for collision
+    if dino_x < obstacle_x + obstacle_width and dino_x + dino_width > obstacle_x and dino_y + dino_height > obstacle_y:
+        running = False  # End game on collision
+
+    # Draw background, dinosaur, and obstacle
+    screen.fill((200, 200, 200))
+    pygame.draw.rect(screen, (0, 150, 0), (dino_x, dino_y, dino_width, dino_height))
+    pygame.draw.rect(screen, (200, 50, 50), (obstacle_x, obstacle_y, obstacle_width, obstacle_height))
 
     pygame.display.update()
+    pygame.time.Clock().tick(30)
 
 pygame.quit()
     pass
 ```
 
-- What was ChatGPT's solution or suggestion?
-- How did it differ from your original approach?
+- ChatGPT's solution was to add a character with variables. Also adding a moving obstacles, and if the character hits an obstacles, the game restarts. 
+- In my orginal approach, I didn't know how to start, so I only created a pygame window with a game loop and background but had no gameplay mechanics or objects
 
 ---
 
 ## 5. **Reflection on Changes**
 
-ChatGPT was helpful in setting up movement. The game loop now allows for continuous movement, and the player can move around the character. I now know how to use basic user input and move a player object around in pygame. 
+ChatGPT was helpful in setting up movement. The game loop now allows the player to press the space to make the character jump over objects. Obstacles move across the screen, and ends the game when hit. 
 
 ---
 
 ## 6. **Testing and Results**
-
-I ran the updated code, and the player character moves left and right. However, it's still missing music notes and a scoring system.
+I ran the updated code, and the character can jump over obstacles. If the character hits an obstacle, the game stops.
 
 ---
 
 ## 7. **What Did You Learn?**
 
-I learned how to use basic user input and move a player object around in pygame. I also have an little understanding on game loops in pygame. I am more confident in the basics, however, I need more practice with adding and handling multiple game objects.
+I learned how to use jumping mechanics, create and move obstacles across the screen, and end the game when an object is touched.
 
 ---
