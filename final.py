@@ -10,6 +10,10 @@ pygame.display.set_caption("KSC game")
 background = pygame.image.load('pixel-background.jpg')
 background = pygame.transform.scale(background, (screen_width, screen_height))
 
+pygame.mixer.music.load("audio.mp3") 
+pygame.mixer.music.play(-1)
+jump_sound = pygame.mixer.Sound("fart.wav")
+
 jumping = False
 falling = False
 
@@ -58,6 +62,7 @@ while running:
         if jump_count <= 0:
             jumping = False
             falling = True
+            jump_sound.play()
     if falling:
         oval1_y += 5  
         if oval1_y >= 600:  
@@ -73,5 +78,5 @@ while running:
 
     pygame.display.update()
     pygame.time.delay(30)
-
+pygame.mixer.music.stop()
 pygame.quit()
