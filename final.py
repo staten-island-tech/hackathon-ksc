@@ -7,7 +7,7 @@ screen_height = 800
 screen = pygame.display.set_mode((screen_width, screen_height))
 pygame.display.set_caption("KSC game") 
 
-background = pygame.image.load('/Users/shirleyjiang/Documents/GitHub/hackathon-ksc/pixel-background.jpg')
+background = pygame.image.load('pixel-background.jpg')
 background = pygame.transform.scale(background, (screen_width, screen_height))
 
 jumping = False
