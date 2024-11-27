@@ -1,7 +1,7 @@
 
 # ChatGPT Coding Diary
 
-## Project Name: Dinosaur game
+## Project Name: KSC game
 
 ### Date: _11/25/24_
 
