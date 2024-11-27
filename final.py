@@ -12,7 +12,7 @@ background = pygame.transform.scale(background, (screen_width, screen_height))
 
 pygame.mixer.music.load("audio.mp3") 
 pygame.mixer.music.play(-1)
-jump_sound = pygame.mixer.Sound("fart.wav")
+jump_sound = pygame.mixer.Sound("jump.wav")
 
 jumping = False
 falling = False
