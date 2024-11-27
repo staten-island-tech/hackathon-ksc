@@ -18,7 +18,7 @@ pygame.mixer.music.load("audio.mp3")  # Replace with your audio file path
 pygame.mixer.music.play(-1)  # Loop the background music indefinitely
 
 # Load sound effects
-jump_sound = pygame.mixer.Sound("fart.wav")  # Replace with your jump sound file path
+jump_sound = pygame.mixer.Sound("jump.wav")  # Replace with your jump sound file path
 
 # Main game loop
 running = True
