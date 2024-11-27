@@ -33,7 +33,7 @@ obstacle_width = 30
 obstacle_height = 30
 obstacle_color = (255, 255, 255)
 
-jump_count = 30
+jump_count = 35
 
 running = True 
 while running:
@@ -55,7 +55,7 @@ while running:
     keys = pygame.key.get_pressed()
     if keys[pygame.K_SPACE] and not jumping and not falling:
         jumping = True
-        jump_count = 30
+        jump_count = 35
     if jumping:
         oval1_y -= 5  
         jump_count -= 1
